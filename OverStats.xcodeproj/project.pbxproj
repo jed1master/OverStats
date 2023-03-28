@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F20C76DF29CF3BD500237569 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20C76DE29CF3BD500237569 /* DataModel.swift */; };
+		F20C76E129CF405E00237569 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20C76E029CF405E00237569 /* DataController.swift */; };
 		F24035AD29B661420001FA70 /* ResultScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24035AC29B661420001FA70 /* ResultScreen.swift */; };
 		F2BC14982880CA9C0018E946 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BC14972880CA9C0018E946 /* AppDelegate.swift */; };
 		F2BC149A2880CA9C0018E946 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BC14992880CA9C0018E946 /* SceneDelegate.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F20C76DE29CF3BD500237569 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		F20C76E029CF405E00237569 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		F24035AC29B661420001FA70 /* ResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreen.swift; sourceTree = "<group>"; };
 		F2BC14942880CA9C0018E946 /* OverStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2BC14972880CA9C0018E946 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +53,7 @@
 		F26A1AC429BF7FF300D81641 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F20C76DE29CF3BD500237569 /* DataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -56,6 +61,7 @@
 		F26A1AC529BF7FFE00D81641 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F20C76E029CF405E00237569 /* DataController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -161,6 +167,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F20C76DF29CF3BD500237569 /* DataModel.swift in Sources */,
+				F20C76E129CF405E00237569 /* DataController.swift in Sources */,
 				F2BC149C2880CA9C0018E946 /* SearchScreen.swift in Sources */,
 				F2BC14982880CA9C0018E946 /* AppDelegate.swift in Sources */,
 				F24035AD29B661420001FA70 /* ResultScreen.swift in Sources */,
