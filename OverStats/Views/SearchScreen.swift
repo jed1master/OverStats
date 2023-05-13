@@ -9,22 +9,33 @@ import UIKit
 
 class SearchScreen: UIViewController, UITextFieldDelegate {
     
-    let controller = DataController()
+    var controller = DataController()
     
     let searchButton = UIButton()
     let searchTextField = UITextField()
     let logoImageView = UIImageView()
+    let activityIndicator = UIActivityIndicatorView()
+    var privateProfile: Bool?
     
+    
+    
+//    var resultScreen : ResultScreen?
+    
+    
+    //сделать референс к самому верхнему констрейнту
+    var topConstraint : NSLayoutConstraint?
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTextField.delegate = self
+        controller.delegate = self
         
         setupLogoImageView()
         setupSearchTextField()
         setupSearchButton()
+        setupActivityIndicator()
         setupKeyboardHiding()
         
         
@@ -33,32 +44,41 @@ class SearchScreen: UIViewController, UITextFieldDelegate {
     
     func setupLogoImageView() {
         
-        view.addSubview(logoImageView)
         logoImageView.image = UIImage(named: "ow2logo.png")
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(logoImageView)
+        
+        let constraint = logoImageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 130)
+        
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 50),
-            logoImageView.widthAnchor.constraint(equalToConstant: 360),
-            logoImageView.heightAnchor.constraint(equalToConstant: 220)
+            constraint,
+            logoImageView.widthAnchor.constraint(equalToConstant: 400),
+            logoImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
-        
+        topConstraint = constraint
     }
     
     func setupSearchTextField() {
-        view.addSubview(searchTextField)
+        searchTextField.text = "jed1master#2662"
+        
         searchTextField.layer.borderWidth = 1
         searchTextField.borderStyle = .roundedRect
         searchTextField.placeholder = "Enter your battletag"
         searchTextField.autocapitalizationType = .none
+        searchTextField.autocorrectionType = .default
+        // clear button
+        searchTextField.endEditing(true)
         searchTextField.textAlignment = .center
         searchTextField.font = UIFont.systemFont(ofSize: 24)
         searchTextField.textColor = .white
         searchTextField.backgroundColor = .orange
         
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(searchTextField)
         
         NSLayoutConstraint.activate([
             
@@ -70,7 +90,7 @@ class SearchScreen: UIViewController, UITextFieldDelegate {
     }
     
     func setupSearchButton() {
-        view.addSubview(searchButton)
+        
         searchButton.configuration = .filled()
         searchButton.configuration?.baseBackgroundColor = .orange
         searchButton.configuration?.baseForegroundColor = .black
@@ -81,6 +101,8 @@ class SearchScreen: UIViewController, UITextFieldDelegate {
         
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(searchButton)
+        
         NSLayoutConstraint.activate([
             searchButton.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 30),
             searchButton.centerXAnchor.constraint(equalTo: searchTextField.centerXAnchor),
@@ -89,8 +111,53 @@ class SearchScreen: UIViewController, UITextFieldDelegate {
         ])
     }
     
+    func setupActivityIndicator() {
+        
+        activityIndicator.style = .large
+        activityIndicator.color = .white
+        
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 30),
+            activityIndicator.centerXAnchor.constraint(equalTo: searchButton.centerXAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 80),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+    // UIProgressView даобавить ниже кнопки поиска, сделать скрытым, показывать пока не пришел ответ в делегат
     @objc func searchButtonTapped() {
-        controller.decodeData()
+        
+        if let battletag = searchTextField.text {
+            controller.fetchPlayerInfo(battletag: battletag)
+        }
+        searchTextField.text = ""
+        
+        activityIndicator.startAnimating()
+        
+//        goToNextScreen()
+    }
+    
+//    func goToNextScreen() {
+//        let nextScreen = ResultScreen()
+////        resultScreen = nextScreen
+//
+//        nextScreen.title = "Result Screen"
+//        navigationController?.pushViewController(nextScreen, animated: false)
+//
+//    }
+    
+    //MARK: - Setup alert action
+    
+    func showAlert() {
+        let alert = UIAlertController(title: nil, message: "Profile is private", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        
+        present(alert, animated: true)
     }
     
     //MARK: - Setup searchTextField Delegate
@@ -101,6 +168,7 @@ class SearchScreen: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        //isEmpty bool? error
         if textField.text != "" {
             return true
         } else {
@@ -125,24 +193,67 @@ class SearchScreen: UIViewController, UITextFieldDelegate {
 extension SearchScreen {
     @objc func keyboardWillShow(sender: NSNotification) {
         guard let userInfo = sender.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
-              let currentTextField = UIResponder.currentFirst() as? UITextField else { return }
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
-        let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
+        let convertedTextFieldFrame = view.convert(searchTextField.frame, from: searchTextField.superview)
         let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
         
-        let textFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
+        let textFieldFrame = view.convert(searchTextField.frame, from: searchTextField.superview)
         
         if textFieldBottomY > keyboardTopY {
-            let textBoxY = convertedTextFieldFrame.origin.y
-            let newFrameY = (textBoxY - keyboardTopY / 2) * -1
-            view.frame.origin.y = newFrameY
+            
+            topConstraint?.constant = -90
+            view.setNeedsLayout()
+            //            let textBoxY = convertedTextFieldFrame.origin.y
+            //            let newFrameY = (textBoxY - keyboardTopY / 2) * -1
+            //            view.frame.origin.y = newFrameY
         }
     }
     
     @objc func keyboardWillHide(sender: NSNotification) {
-        view.frame.origin.y = 0
+        //референс к констрейнту
+        //        view.frame.origin.y = 0
+        topConstraint?.constant = 50
+        view.setNeedsLayout()
     }
 }
 
+
+//MARK: - DataControllerDelegate
+
+
+extension SearchScreen: DataControllerDelegate {
+    
+    func didUpdatePlayerInfo(_ dataController: DataController, playerInfo: PlayerModel) {
+        
+        
+        DispatchQueue.main.async { [weak self] in
+            
+            if playerInfo.privateProfile {
+                
+                self?.showAlert()
+            } else {
+                let nextScreen = ResultScreen(playerModel: playerInfo)
+//                nextScreen.playerNameLabel.text = playerInfo.playerName.uppercased()
+//                nextScreen.playerIconImage.image = playerInfo.playerIcon
+                
+                
+//                print(playerInfo.playerEndorsementIcon)
+//                print(playerInfo.playerIcon)
+                //вью прогресс
+                self?.activityIndicator.stopAnimating()
+                
+                nextScreen.title = "Result Screen"
+//                self?.navigationController?.pushViewController(nextScreen, animated: true)
+                self?.present(nextScreen, animated: true)
+                
+            }
+            
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+}

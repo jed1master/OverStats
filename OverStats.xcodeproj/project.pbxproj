@@ -7,20 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F20C76DF29CF3BD500237569 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20C76DE29CF3BD500237569 /* DataModel.swift */; };
+		F20C76DF29CF3BD500237569 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20C76DE29CF3BD500237569 /* PlayerData.swift */; };
 		F20C76E129CF405E00237569 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20C76E029CF405E00237569 /* DataController.swift */; };
+		F217378929E4475D000CCC86 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F217378829E4475D000CCC86 /* PlayerModel.swift */; };
+		F21B79632A02A99200F9F2D2 /* SVGKit in Frameworks */ = {isa = PBXBuildFile; productRef = F21B79622A02A99200F9F2D2 /* SVGKit */; };
+		F21B79652A02A99200F9F2D2 /* SVGKitSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F21B79642A02A99200F9F2D2 /* SVGKitSwift */; };
 		F24035AD29B661420001FA70 /* ResultScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24035AC29B661420001FA70 /* ResultScreen.swift */; };
 		F2BC14982880CA9C0018E946 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BC14972880CA9C0018E946 /* AppDelegate.swift */; };
 		F2BC149A2880CA9C0018E946 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BC14992880CA9C0018E946 /* SceneDelegate.swift */; };
 		F2BC149C2880CA9C0018E946 /* SearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BC149B2880CA9C0018E946 /* SearchScreen.swift */; };
 		F2BC14A12880CAA30018E946 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2BC14A02880CAA30018E946 /* Assets.xcassets */; };
 		F2BC14A42880CAA30018E946 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2BC14A22880CAA30018E946 /* LaunchScreen.storyboard */; };
+		F2EAB3662A044D9B003E6C8C /* sampleEndorsementIcon.svg in Resources */ = {isa = PBXBuildFile; fileRef = F2EAB3652A044D9B003E6C8C /* sampleEndorsementIcon.svg */; };
 		F2FA86AA29D4D92800A144C1 /* UIResponder+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FA86A929D4D92800A144C1 /* UIResponder+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F20C76DE29CF3BD500237569 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		F20C76DE29CF3BD500237569 /* PlayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
 		F20C76E029CF405E00237569 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		F217378829E4475D000CCC86 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		F24035AC29B661420001FA70 /* ResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreen.swift; sourceTree = "<group>"; };
 		F2BC14942880CA9C0018E946 /* OverStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OverStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2BC14972880CA9C0018E946 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -29,6 +34,7 @@
 		F2BC14A02880CAA30018E946 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2BC14A32880CAA30018E946 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2BC14A52880CAA30018E946 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2EAB3652A044D9B003E6C8C /* sampleEndorsementIcon.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleEndorsementIcon.svg; sourceTree = "<group>"; };
 		F2FA86A929D4D92800A144C1 /* UIResponder+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -37,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F21B79652A02A99200F9F2D2 /* SVGKitSwift in Frameworks */,
+				F21B79632A02A99200F9F2D2 /* SVGKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,7 +63,8 @@
 		F26A1AC429BF7FF300D81641 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F20C76DE29CF3BD500237569 /* DataModel.swift */,
+				F20C76DE29CF3BD500237569 /* PlayerData.swift */,
+				F217378829E4475D000CCC86 /* PlayerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -64,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				F20C76E029CF405E00237569 /* DataController.swift */,
+				F2EAB3652A044D9B003E6C8C /* sampleEndorsementIcon.svg */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -124,6 +134,10 @@
 			dependencies = (
 			);
 			name = OverStats;
+			packageProductDependencies = (
+				F21B79622A02A99200F9F2D2 /* SVGKit */,
+				F21B79642A02A99200F9F2D2 /* SVGKitSwift */,
+			);
 			productName = OverStats;
 			productReference = F2BC14942880CA9C0018E946 /* OverStats.app */;
 			productType = "com.apple.product-type.application";
@@ -152,6 +166,9 @@
 				Base,
 			);
 			mainGroup = F2BC148B2880CA9C0018E946;
+			packageReferences = (
+				F21B79612A02A99200F9F2D2 /* XCRemoteSwiftPackageReference "SVGKit" */,
+			);
 			productRefGroup = F2BC14952880CA9C0018E946 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -167,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2BC14A42880CAA30018E946 /* LaunchScreen.storyboard in Resources */,
+				F2EAB3662A044D9B003E6C8C /* sampleEndorsementIcon.svg in Resources */,
 				F2BC14A12880CAA30018E946 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,8 +196,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F20C76DF29CF3BD500237569 /* DataModel.swift in Sources */,
+				F20C76DF29CF3BD500237569 /* PlayerData.swift in Sources */,
 				F2FA86AA29D4D92800A144C1 /* UIResponder+Utils.swift in Sources */,
+				F217378929E4475D000CCC86 /* PlayerModel.swift in Sources */,
 				F20C76E129CF405E00237569 /* DataController.swift in Sources */,
 				F2BC149C2880CA9C0018E946 /* SearchScreen.swift in Sources */,
 				F2BC14982880CA9C0018E946 /* AppDelegate.swift in Sources */,
@@ -392,6 +411,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F21B79612A02A99200F9F2D2 /* XCRemoteSwiftPackageReference "SVGKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SVGKit/SVGKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F21B79622A02A99200F9F2D2 /* SVGKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F21B79612A02A99200F9F2D2 /* XCRemoteSwiftPackageReference "SVGKit" */;
+			productName = SVGKit;
+		};
+		F21B79642A02A99200F9F2D2 /* SVGKitSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F21B79612A02A99200F9F2D2 /* XCRemoteSwiftPackageReference "SVGKit" */;
+			productName = SVGKitSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F2BC148C2880CA9C0018E946 /* Project object */;
 }
