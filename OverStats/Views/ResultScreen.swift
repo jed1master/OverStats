@@ -35,8 +35,8 @@ class ResultScreen: UIViewController {
     
     
     
-//    let playerModel = PlayerModel()
-
+    //    let playerModel = PlayerModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,11 +50,12 @@ class ResultScreen: UIViewController {
         setupTankRankIconImage()
         setupDamageRankIconImage()
         setupSupportRankIconImage()
+        updateImageForRole()
         
     }
-
     
- //MARK: - Setup view objects
+    
+    //MARK: - Setup view objects
     
     func setupPlayerIconImage() {
         
@@ -100,8 +101,8 @@ class ResultScreen: UIViewController {
         playerEndoresmentIconImage.translatesAutoresizingMaskIntoConstraints = false
         
         
-//        SVGKImageView *skv = [[SVGKImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@“image.svg”]];
-//        [self.view addSubview: skv]
+        //        SVGKImageView *skv = [[SVGKImageView alloc] initWithSVGKImage: [SVGKImage imageNamed:@“image.svg”]];
+        //        [self.view addSubview: skv]
         
         view.addSubview(playerEndoresmentIconImage)
         
@@ -116,19 +117,19 @@ class ResultScreen: UIViewController {
     func setupDamageRoleIconImage() {
         
         guard let endorsmentIconImage = playerEndoresmentIconImage else { return }
-            
-            damageRoleIconImage.image = UIImage(named: "damageIcon.png")
-            
-            damageRoleIconImage.translatesAutoresizingMaskIntoConstraints = false
-            
-            view.addSubview(damageRoleIconImage)
-            
-            NSLayoutConstraint.activate([
-                damageRoleIconImage.topAnchor.constraint(equalTo: endorsmentIconImage.bottomAnchor, constant: 15),
-                damageRoleIconImage.centerXAnchor.constraint(equalTo: endorsmentIconImage.centerXAnchor),
-                damageRoleIconImage.widthAnchor.constraint(equalToConstant: 90),
-                damageRoleIconImage.heightAnchor.constraint(equalToConstant: 80)
-            ])
+        
+        damageRoleIconImage.image = UIImage(named: "damageIcon.png")
+        
+        damageRoleIconImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(damageRoleIconImage)
+        
+        NSLayoutConstraint.activate([
+            damageRoleIconImage.topAnchor.constraint(equalTo: endorsmentIconImage.bottomAnchor, constant: 15),
+            damageRoleIconImage.centerXAnchor.constraint(equalTo: endorsmentIconImage.centerXAnchor),
+            damageRoleIconImage.widthAnchor.constraint(equalToConstant: 90),
+            damageRoleIconImage.heightAnchor.constraint(equalToConstant: 80)
+        ])
         
     }
     
@@ -155,7 +156,7 @@ class ResultScreen: UIViewController {
     func setupSupportRoleIconImage() {
         
         guard let endorsmentIconImage = playerEndoresmentIconImage else { return }
-
+        
         
         
         supportRoleIconImage.image = UIImage(named: "supportIcon.png")
@@ -174,7 +175,7 @@ class ResultScreen: UIViewController {
     
     func setupTankRankIconImage() {
         
-        tankRankIconImage.image = UIImage(named: "sampleRankIcon.png")
+        tankRankIconImage.image = UIImage(named: "noData.png")
         
         tankRankIconImage.translatesAutoresizingMaskIntoConstraints = false
         
@@ -190,7 +191,7 @@ class ResultScreen: UIViewController {
     
     func setupDamageRankIconImage() {
         
-        damageRankIconImage.image = UIImage(named: "sampleRankIcon.png")
+        damageRankIconImage.image = UIImage(named: "noData.png")
         
         damageRankIconImage.translatesAutoresizingMaskIntoConstraints = false
         
@@ -206,7 +207,7 @@ class ResultScreen: UIViewController {
     
     func setupSupportRankIconImage() {
         
-        supportRankIconImage.image = UIImage(named: "sampleRankIcon.png")
+        supportRankIconImage.image = UIImage(named: "noData.png")
         
         supportRankIconImage.translatesAutoresizingMaskIntoConstraints = false
         
@@ -220,12 +221,20 @@ class ResultScreen: UIViewController {
         ])
     }
     
-//    func updatePlayerInfo() {
-//        DispatchQueue.main.async {
-//            playerNameLabel.text = playerModel.playerName
-//        }
-//
-//    }
+    func updateImageForRole() {
+        guard let playerRatings = playerModel.playerRatings else {return}
+        for item in playerRatings {
+            for _ in item.role {
+                
+                if item.role == "tank" {
+                    tankRankIconImage.image = item.rankIconImage}
+                else if item.role == "offense" {
+                    damageRankIconImage.image = item.rankIconImage}
+                else if item.role == "support" {
+                    supportRankIconImage.image = item.rankIconImage}
+            }
+        }
+    }
 }
 
 

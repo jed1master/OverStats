@@ -35,7 +35,7 @@ class DataController {
         
         performRequest(with: urlString)
     }
-
+    
     func performRequest(with urlString: String) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
@@ -63,9 +63,9 @@ class DataController {
                                     controller.delegate?.didUpdatePlayerInfo(controller, playerInfo: playerInfo)
                                 })
                                 
-                               
                                 
-
+                                
+                                
                             })
                         })
                     }
@@ -86,8 +86,8 @@ class DataController {
             let ratings = decodedData.ratings
             
             
-             //функция для рейта массив потом тока в плеер модель
-        
+            //функция для рейта массив потом тока в плеер модель
+            
             let playerInfo = PlayerModel(playerName: name, privateProfile: priv, playerIconString: playerIcon, playerEndoresementIconString: endorsementIcon, ratings: ratings, playerRatings: [])
             return playerInfo
             
@@ -100,108 +100,76 @@ class DataController {
     
     
     func getImage(url: String, completion: @escaping (UIImage) -> ()) {
-
+        
         print(url)
         
         if let url = URL(string: url) {
-
-             let dataTask = URLSession.shared.dataTask(with: url) {  data, response, error in
-
-                 if error != nil {
-                     print(error!)
-                     return
-                 }
-                 if let safeData = data, let image = UIImage(data: safeData) {
-
-                     
-                     completion(image)
-                 } else {
-                     print("failed", url)
-                 }
-             }
-             dataTask.resume()
-         }
-     }
+            
+            let dataTask = URLSession.shared.dataTask(with: url) {  data, response, error in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                if let safeData = data, let image = UIImage(data: safeData) {
+                    
+                    
+                    completion(image)
+                } else {
+                    print("failed", url)
+                }
+            }
+            dataTask.resume()
+        }
+    }
     
     func getSVGImage(url: String, completion: @escaping (SVGKImage) -> ()) {
-
+        
         print(url)
         
         if let url = URL(string: url) {
-
-             let dataTask = URLSession.shared.dataTask(with: url) {  data, response, error in
-
-                 if error != nil {
-                     print(error!)
-                     return
-                 }
-                 if let safeData = data, let image = SVGKImage(data: safeData) {
-                     
-                     completion(image)
-                 } else {
-                     print("failed", url)
-                 }
-             }
-             dataTask.resume()
-         }
-     }
+            
+            let dataTask = URLSession.shared.dataTask(with: url) {  data, response, error in
+                
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                if let safeData = data, let image = SVGKImage(data: safeData) {
+                    
+                    completion(image)
+                } else {
+                    print("failed", url)
+                }
+            }
+            dataTask.resume()
+        }
+    }
     
     func getRatringsImages(dataRating: [Ratings], completion: @escaping ([PlayerRatings]) -> ()) {
         
-        var kakoitomassiv = [PlayerRatings]
-        //1 вынуть 1 элемент из dataRatings , если получилось скачать картинку, если не пролучилось значит массив пустой, вызвать комплишн
+        var elements = dataRating
         
+        if elements .isEmpty {
+            completion([])
+        } else {
+            
+            let lastElement = elements.removeLast()
+            
+            guard let lastIconUrl = lastElement.rankIcon, let lastRole = lastElement.role
+            else { return }
+            
+            getImage(url: lastIconUrl ) { rankIconImage in
+                
+                self.getRatringsImages(dataRating: elements) { playerRatings in
+                    
+                    var ratingWithRoleAndImage = playerRatings
+                    
+                    ratingWithRoleAndImage.append(PlayerRatings(role: lastRole, rankIconImage: rankIconImage))
+                    completion(ratingWithRoleAndImage)
+                }
+            }
+            
+        }
     }
-//
-//    func getEndorsementIconImage(data: PlayerData) {
-//
-//        let urlString = data.icon
-//
-//         if let url = URL(string: urlString) {
-//
-//             let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
-//
-//                 if error != nil {
-//                     print(error!)
-//                     return
-//                 }
-//                 if let safeData = data {
-//                     do {
-//                         //картинок несколько, новая структура??
-//                         self?.playerEndorsementIconImage = UIImage(data: safeData)
-//                     } catch {
-//                         print(error)
-//                     }
-//                 }
-//             }
-//             dataTask.resume()
-//         }
-//     }
-//
-//
-//
-//    func getPlayerRankedIconImage(data: PlayerData) {
-//
-//        let urlString = data.icon
-//
-//         if let url = URL(string: urlString) {
-//
-//             let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
-//
-//                 if error != nil {
-//                     print(error!)
-//                     return
-//                 }
-//                 if let safeData = data {
-//                     do {
-//                         //картинок несколько, новая структура??
-////                         self?.playerEndorsementImage = UIImage(data: safeData)
-//                     } catch {
-//                         print(error)
-//                     }
-//                 }
-//             }
-//             dataTask.resume()
-//         }
-//     }
 }

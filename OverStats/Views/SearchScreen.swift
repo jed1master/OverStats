@@ -199,7 +199,7 @@ extension SearchScreen {
         let convertedTextFieldFrame = view.convert(searchTextField.frame, from: searchTextField.superview)
         let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
         
-        let textFieldFrame = view.convert(searchTextField.frame, from: searchTextField.superview)
+        _ = view.convert(searchTextField.frame, from: searchTextField.superview)
         
         if textFieldBottomY > keyboardTopY {
             

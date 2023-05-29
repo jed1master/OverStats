@@ -22,6 +22,6 @@ struct PlayerModel {
 
 struct PlayerRatings {
     let role: String
-    var roleIcon: UIImage?
+    var rankIconImage: UIImage?
 }
 
